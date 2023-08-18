@@ -34,8 +34,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# pcmanfm as daemon to manage automounting of systemd
+#maybe unnecesary, could be replaced by autofs and proper udev .rules files setting
+exec --no-startup-id pcmanfm --daemon-mode
+
 #set left monitor
 exec --no-startup-id xrandr --output HDMI-1 --left-of eDP-1 --auto --rotate left
+
+#Screensaver timeout
+#exec xset dpms 0 0 7200
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -45,8 +52,10 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 #Brightness 
-bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+# increase screen brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5
+# decrease screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 
 
 # switch keymap
 bindsym $mod+Ctrl+Shift+F11 exec setxkbmap -layout us 
@@ -57,17 +66,18 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty
-
+#faster approach
+bindsym $mod+n exec kitty 
 # kill focused window
 bindsym $mod+q kill
 
-# TODO lock screen
-bindsym $mod+ctrl+shift+l exec --no-startup-id i3lock
+# start a ranger
+bindsym $mod+m exec kitty ranger
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindsym $mod+c exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -207,7 +217,8 @@ bindsym $mod+r mode "resize"
 
 # i3 move a workspace to another monitor (multi monitor setup)
 mode "move_workspace" {
- 	bindsym j  move workspace to output up
+	# move workspace to different display in the setup
+	bindsym j  move workspace to output up
  	bindsym k  move workspace to output down
 	bindsym h  move workspace to output left
 	bindsym l  move workspace to output right
@@ -241,41 +252,35 @@ bindsym $mod+o mode "move_workspace"
 # Press $mod+m followed by either f, t, Esc or Return to launch firefox,
 #  etc ... or return to the default mode, respectively.
 #set $mode_launcher Launch: [f]irefox [c]hrome [r]emmina [w]riter
-#bindsym $mod+p mode "$mode_launcher"
+bindsym $mod+t mode "$mode_launcher"
 
-#mode "$mode_launcher" {
+mode "$mode_launcher" {
 
-#    bindsym f exec firefox, mode "default"
-#    bindsym c exec google-chrome-stable, mode "default"
-#    bindsym r exec remmina, mode "default"
-#    bindsym w exec writer, mode "default"
+	bindsym f exec firefox, mode "default"
 
-#    bindsym Return mode "default"
-#    bindsym Escape mode "default"
-#}
-
-#Press $mod+x followed by either for shutting
-
-set $exitMode "exit: [l]ock, [s]leep, [h]ibernate, [e]nd session, [r]eboot, [p]ower off" 
-
-mode $exitMode {
-
-	bindsym l exec i3lock -c1f001f; mode "default"
-
-	bindsym s exec i3lock -c1f001f && systemctl suspend; mode "default"
-
-	bindsym h exec i3lock -c1f001f && systemctl hibernate; mode "default"
-	
-	bindsym e exec i3-msg exit
-
-	bindsym r exec systemctl reboot
-
-	bindsym p exec systemctl shutdown
-
+	# End mode
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
 	bindsym q      mode "default"
+	bindsym $mod+p mode "default"
+}
 
+#Press $mod+x followed by either for shutting
+set $exitMode "exit: [l]ock, [s]leep, [h]ibernate, [e]nd session, [r]eboot, [p]ower off" 
+mode $exitMode {
+
+	bindsym l exec i3lock -c1f001f; mode "default"
+	bindsym s exec i3lock -c1f001f && systemctl suspend; mode "default"
+	bindsym h exec i3lock -c1f001f && systemctl hibernate; mode "default"
+	bindsym e exec i3-msg exit
+	bindsym r exec systemctl reboot
+	bindsym p exec systemctl shutdown
+
+	# End mode
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym q      mode "default"
+	bindsym $mod+x mode "default"
 }
 
 bindsym $mod+x mode $exitMode
