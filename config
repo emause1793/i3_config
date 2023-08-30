@@ -249,10 +249,10 @@ bindsym $mod+o mode "move_workspace"
 
 # Press $mod+m followed by either f, t, Esc or Return to launch firefox,
 #  etc ... or return to the default mode, respectively.
-#set $mode_launcher Launch: [f]irefox [c]hrome [r]emmina [w]riter
-bindsym $mod+t mode "$mode_launcher"
+set $launch_mode "Launch: [f]irefox"
+bindsym $mod+t mode $launch_mode
 
-mode "$mode_launcher" {
+mode $launch_mode {
 
 	bindsym f exec firefox, mode "default"
 
