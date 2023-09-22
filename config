@@ -181,7 +181,10 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-mode "resize" {
+# Resize window mode
+set $resize_mode "Resize window"
+bindsym $mod+r mode $resize_mode
+mode $resize_mode {
         # These bindings trigger as soon as you enter the resize mode
 
         # firefox --new-window www.# Pressing left will shrink the window’s width.
@@ -211,17 +214,18 @@ mode "resize" {
 	bindsym $mod+9 workspace number $ws9
 	bindsym $mod+0 workspace number $ws10
 
-        # back to normal: Enter or Escape or $mod+r
+        # back to normal
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym q      mode "default"
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+# Move workspace (between monitors) mode for multi monitor setup
+set $wsmove_mode "Move workspace"
+bindsym $mod+o mode $wsmove_mode
 
-# i3 move a workspace to another monitor (multi monitor setup)
-mode "move_workspace" {
+mode $wsmove_mode {
 	# move workspace to different display in the setup
 	bindsym j  move workspace to output up
  	bindsym k  move workspace to output down
@@ -252,10 +256,7 @@ mode "move_workspace" {
 	bindsym $mod+o mode "default"
 }
 
-bindsym $mod+o mode "move_workspace"
-
-# Press $mod+m followed by either f, t, Esc or Return to launch firefox,
-#  etc ... or return to the default mode, respectively.
+# Quick launch mode for frequently used programs
 set $qlaunch_mode "Quick launch: [f]irefox, [g] private firefox, [t]or browser, [v]lc, [k]alculator, [s]ignal, [c]ontrols"
 bindsym $mod+t mode $qlaunch_mode
 
@@ -277,9 +278,11 @@ mode $qlaunch_mode {
 	bindsym $mod+p mode "default"
 }
 
-#Press $mod+x followed by either for shutting
-set $exitMode "exit: [l]ock, [s]leep, [h]ibernate, [e]nd session, [r]eboot, [p]ower off" 
-mode $exitMode {
+# Exit mode for for exiting/suspending/... session
+set $exit_mode "exit: [l]ock, [s]leep, [h]ibernate, [e]nd session, [r]eboot, [p]ower off" 
+bindsym $mod+x mode $exit_mode
+
+mode $exit_mode {
 	bindsym l exec i3lock -c1f001f; mode "default"
 	bindsym s exec i3lock -c1f001f && systemctl suspend; mode "default"
 	bindsym h exec i3lock -c1f001f && systemctl hibernate; mode "default"
@@ -293,8 +296,6 @@ mode $exitMode {
 	bindsym q      mode "default"
 	bindsym $mod+x mode "default"
 }
-
-bindsym $mod+x mode $exitMode
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
