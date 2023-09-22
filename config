@@ -253,10 +253,10 @@ bindsym $mod+o mode "move_workspace"
 
 # Press $mod+m followed by either f, t, Esc or Return to launch firefox,
 #  etc ... or return to the default mode, respectively.
-set $launch_mode "Launch: [f]irefox, [g] private firefox, [v]lc, [k]alculator, [s]ignal, [c]ontrols"
-bindsym $mod+t mode $launch_mode
+set $qlaunch_mode "Quick launch: [f]irefox, [g] private firefox, [v]lc, [k]alculator, [s]ignal, [c]ontrols"
+bindsym $mod+t mode $qlaunch_mode
 
-mode $launch_mode {
+mode $qlaunch_mode {
 
 	bindsym f exec firefox,				mode "default"
 	bindsym g exec firefox --private-window,	mode "default"
