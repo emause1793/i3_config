@@ -275,7 +275,7 @@ mode $qlaunch_mode {
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
 	bindsym q      mode "default"
-	bindsym $mod+p mode "default"
+	bindsym $mod+t mode "default"
 }
 
 # Exit mode for for exiting/suspending/... session
