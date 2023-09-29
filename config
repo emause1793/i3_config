@@ -256,10 +256,10 @@ mode $resize_mode {
 	bindsym $mod+0 workspace number $ws10
 
         # back to normal
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym q      mode "default"
-        bindsym $mod+r mode "default"
+        bindsym Escape	mode "default"
+        bindsym Return	mode "default"
+        bindsym q	mode "default"
+        bindsym $mod+r	mode "default"
 }
 
 # Move workspace (between monitors) mode for multi monitor setup
@@ -291,10 +291,10 @@ mode $wsmove_mode {
 	bindsym $mod+0 workspace number $ws10
 
 	# End mode
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
-	bindsym q      mode "default"
-	bindsym $mod+o mode "default"
+	bindsym Escape	mode "default"
+	bindsym Return	mode "default"
+	bindsym q	mode "default"
+	bindsym $mod+o	mode "default"
 }
 
 # Quick launch mode for frequently used programs
@@ -314,10 +314,10 @@ mode $qlaunch_mode {
 
 
 	# End mode
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
-	bindsym q      mode "default"
-	bindsym $mod+t mode "default"
+	bindsym Escape	mode "default"
+	bindsym Return	mode "default"
+	bindsym q	mode "default"
+	bindsym $mod+t	mode "default"
 }
 
 # Exit mode for for exiting/suspending/... session
@@ -333,10 +333,10 @@ mode $exit_mode {
 	bindsym p exec systemctl shutdown
 
 	# End mode
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
-	bindsym q      mode "default"
-	bindsym $mod+x mode "default"
+	bindsym Escape	mode "default"
+	bindsym Return	mode "default"
+	bindsym q	mode "default"
+	bindsym $mod+x	mode "default"
 }
 
 # Start i3bar to display a workspace bar (plus the system information i3status
