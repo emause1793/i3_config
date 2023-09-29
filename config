@@ -298,7 +298,7 @@ mode $wsmove_mode {
 }
 
 # Quick launch mode for frequently used programs
-set $qlaunch_mode "Quick launch: [f]irefox, [g] private firefox, [t]or browser, [v]lc, [k]alculator, [s]ignal, [c]ontrols"
+set $qlaunch_mode "Quick launch: [f]irefox, [g] private firefox, [t]or browser, [v]lc, [k]alculator, [s]ignal, [c]ontrols, [a]nki"
 bindsym $mod+t mode $qlaunch_mode
 
 mode $qlaunch_mode {
@@ -310,6 +310,7 @@ mode $qlaunch_mode {
 	bindsym k exec gnome-calculator,					mode "default"
 	bindsym c exec gnome-control-center,					mode "default"
 	bindsym s exec signal-desktop,						mode "default"
+	bindsym a exec anki,							mode "default"
 
 
 	# End mode
